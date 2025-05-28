@@ -1,0 +1,8 @@
+MySQL RP (Restore Performance) 8.0
+
+This is modified version of MySQL 8.0 Community.
+Developing to restore performance equal to or better than previous major versions.
+
+The license of this code is governed by the same license as MySQL "Community" only. (./LICENSE)
+
+The rights to the code for proprietary differences from the original are reserved by buildup-db.
