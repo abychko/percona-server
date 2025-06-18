@@ -1,3 +1,9 @@
+percona-server (8.0.39-30RP4) unstable; urgency=medium
+
+  * [RP004] Optimize InnoDB rw_lock s-lock operation cost on high concurrency
+
+ -- Alexey Bychko <abychko@gmail.com>  Wed, 22 Oct 2025 15:35:51 +0300
+
 percona-server (8.0.39-30RP2) unstable; urgency=medium
 
   * [RP002] Reverts fix for Bug#29508068 to save CPU data cache.
