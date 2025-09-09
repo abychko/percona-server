@@ -1,0 +1,11 @@
+percona-server (8.0.39-30-2) unstable; urgency=low
+
+  * Packaging for 8.0.39 HighLoad MySQL
+
+ -- Alexey Bychko <abychko@gmail.com.com>  Tue, 09 Sep 2025 11:40:00 +0300
+
+percona-server (8.0.12-1) unstable; urgency=low
+
+  * Packaging for 8.0
+
+ -- Evgeniy Patlan <evgeniy.patlan@percona.com>  Mon, 03 Sep 2018 12:50:32 +0300

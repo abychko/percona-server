@@ -1,0 +1,7 @@
+usr/lib/mysql/plugin/ha_tokudb.so
+usr/bin/tokuftdump
+usr/bin/tokuft_logprint
+usr/lib/*/libHotBackup.so
+usr/bin/tokuft_logprint
+usr/lib/mysql/plugin/tokudb_backup.so
+usr/include/backup.h

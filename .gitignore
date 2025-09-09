@@ -35,3 +35,6 @@ scalability_jobs_*
 .cproject
 .project
 .settings/
+
+.DS_Store
+config.*
