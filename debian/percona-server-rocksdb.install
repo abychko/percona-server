@@ -1,0 +1,3 @@
+usr/lib/mysql/plugin/ha_rocksdb.so
+usr/bin/ldb
+usr/bin/sst_dump
