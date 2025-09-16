@@ -2378,7 +2378,8 @@ static void srv_update_cpu_usage() {
     return;
   }
 
-  int n_cpu = 0;
+  // int n_cpu = 0;
+  int n_cpu = 1;
   constexpr int MAX_CPU_N = 128;
   for (int i = 0; i < MAX_CPU_N; ++i) {
     if (CPU_ISSET(i, &cs)) {
