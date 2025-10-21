@@ -1,3 +1,9 @@
+percona-server (8.0.39-30RP1) unstable; urgency=medium
+
+  * Avoiding to use std::mt19937 for saving CPU data cache
+
+ -- Alexey Bychko <abychko@gmail.com>  Tue, 21 Oct 2025 17:40:02 +0300
+
 percona-server (8.0.39-30RP) unstable; urgency=medium
 
   * Packaging for custom RP000 version 
