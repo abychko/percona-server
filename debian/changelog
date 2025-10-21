@@ -1,0 +1,11 @@
+percona-server (8.0.39-30RP) unstable; urgency=medium
+
+  * Packaging for custom RP000 version 
+
+ -- Alexey Bychko <abychko@gmail.com>  Tue, 21 Oct 2025 10:18:17 +0300
+
+percona-server (8.0.12-1) unstable; urgency=low
+
+  * Packaging for 8.0
+
+ -- Evgeniy Patlan <evgeniy.patlan@percona.com>  Mon, 03 Sep 2018 12:50:32 +0300
