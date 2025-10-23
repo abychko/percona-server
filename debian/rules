@@ -10,7 +10,7 @@ export CPPFLAGS=
 export FIPSMODE=0
 
 PACKAGE=percona-server
-PS_VERSION_EXTRA = '@@PERCONA_VERSION_EXTRA@@'
+PS_VERSION_EXTRA = 'XBet Custom by @abychko'
 REVISION = $(shell git rev-parse --short HEAD)
 ifeq ($(FIPSMODE),1)
 	COMPILATION_COMMENT_RELEASE = "Percona Server Pro (GPL), Release $(PS_VERSION_EXTRA), Revision $(REVISION)"
