@@ -1,6 +1,6 @@
-percona-server (8.0.42-33RP13) unstable; urgency=medium
+percona-server (8.0.42-33RP12) unstable; urgency=medium
 
-  * [RP013] everything but [RP003]
+  * [RP012] everything but [RP003] [RP006] [RP013]
 
  -- Alexey Bychko <abychko@gmail.com>  Mon, 10 Nov 2025 15:54:00 +0200
 
