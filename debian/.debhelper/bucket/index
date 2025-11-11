@@ -1,0 +1,8 @@
+cf610daf8afdedbf2110abd79bdd4121d59080cab5ec46deaf67f97273bb6bda storage/tokudb/PerconaFT/third_party/xz-4.999.9beta/build-aux/config.guess
+cf610daf8afdedbf2110abd79bdd4121d59080cab5ec46deaf67f97273bb6bda storage/tokudb/PerconaFT/third_party/snappy-1.1.2/config.guess
+4893a59f143e8cd99ad342be9a2a34feb82aef64827ae7770eae892bd9ca81bc extra/tirpc/libtirpc-1.3.5/config.guess
+692c20041a7231cfa08b91bae80492b13ec7508446670b098e20de084173e2b3 extra/icu/icu-release-73-1/source/config.guess
+deb02c26f43b2ea64276c9ede77ec0f53d08e6256710f3c0a12275712085c348 storage/tokudb/PerconaFT/third_party/xz-4.999.9beta/build-aux/config.sub
+deb02c26f43b2ea64276c9ede77ec0f53d08e6256710f3c0a12275712085c348 storage/tokudb/PerconaFT/third_party/snappy-1.1.2/config.sub
+4374cac4af324f9795762af4192571eb15f5a3cfc427cafd477ee8e946df1b66 extra/tirpc/libtirpc-1.3.5/config.sub
+38930c2485d8935ee7f82bfc61cbf60b9e33a7b96b11fbb26be7adffa2a8f874 extra/icu/icu-release-73-1/source/config.sub
