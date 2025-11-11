@@ -59,7 +59,7 @@ override_dh_auto_configure:
 
 ifeq ($(SKIP_DEBUG_BINARY),)
 	rm -fr $(builddebug) && mkdir $(builddebug) && cd $(builddebug) && \
-	    cmake -DBUILD_CONFIG=mysql_release \
+		cmake -DBUILD_CONFIG=mysql_release \
 		-DCMAKE_INSTALL_PREFIX=/usr \
 		-DINSTALL_DOCDIR=share/mysql/docs \
 		-DINSTALL_DOCREADMEDIR=share/mysql \
@@ -102,7 +102,7 @@ ifeq ($(SKIP_DEBUG_BINARY),)
 		-DWITH_EDITLINE=bundled \
 		-DWITH_LIBEVENT=bundled \
 		-DWITH_FIDO=bundled \
-               -DWITH_ENCRYPTION_UDF=ON \
+		-DWITH_ENCRYPTION_UDF=ON \
 		-DWITH_NUMA=ON \
 		-DWITH_LDAP=system \
 		-DWITH_PERCONA_TELEMETRY=ON \
