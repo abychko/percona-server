@@ -4,21 +4,15 @@
 	dh $@
 
 export DH_VERBOSE=1
-export CFLAGS=
-export CXXFLAGS=
-export CPPFLAGS=
-export FIPSMODE=0
+export CFLAGS=-Wno-error=free-nonheap-object
+export CXXFLAGS=-Wno-error=free-nonheap-object
+export CPPFLAGS=-Wno-error=free-nonheap-object
 
 PACKAGE=percona-server
 PS_VERSION_EXTRA = 'Custom by @abychko'
 REVISION = $(shell git rev-parse --short HEAD)
-ifeq ($(FIPSMODE),1)
-	COMPILATION_COMMENT_RELEASE = "Percona Server Pro (GPL), Release $(PS_VERSION_EXTRA), Revision $(REVISION)"
-	COMPILATION_COMMENT_DEBUG = "Percona Server Pro - Debug (GPL), Release $(PS_VERSION_EXTRA), Revision $(REVISION)"
-else
-	COMPILATION_COMMENT_RELEASE = "Percona Server (GPL), Release $(PS_VERSION_EXTRA), Revision $(REVISION)"
-	COMPILATION_COMMENT_DEBUG = "Percona Server - Debug (GPL), Release $(PS_VERSION_EXTRA), Revision $(REVISION)"
-endif
+COMPILATION_COMMENT_RELEASE = "Percona Server (GPL), Release $(PS_VERSION_EXTRA), Revision $(REVISION)"
+COMPILATION_COMMENT_DEBUG = "Percona Server - Debug (GPL), Release $(PS_VERSION_EXTRA), Revision $(REVISION)"
 TOKUDB_BACKUP_VERSION = "@@TOKUDB_BACKUP_VERSION@@"
 
 TMP=$(CURDIR)/debian/tmp/
@@ -28,7 +22,7 @@ rpath='$$ORIGIN/../private'
 
 ARCH = $(shell dpkg-architecture -qDEB_BUILD_ARCH)
 ARCH_OS = $(shell dpkg-architecture -qDEB_BUILD_ARCH_OS)
-NCPU = $(shell grep -c processor /proc/cpuinfo)
+NCPU = $(shell grep -c proc /proc/cpuinfo)
 DEB_BUILD_GNU_TYPE ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
 DEB_HOST_GNU_TYPE  ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
 
@@ -58,8 +52,8 @@ override_dh_auto_configure:
 	@echo "RULES.$@"
 
 ifeq ($(SKIP_DEBUG_BINARY),)
-	rm -fr $(builddebug) && mkdir $(builddebug) && cd $(builddebug) && \
-		cmake -DBUILD_CONFIG=mysql_release \
+	( rm -fr $(builddebug) && mkdir $(builddebug) ) && cd $(builddebug) && \
+	    cmake -DBUILD_CONFIG=mysql_release \
 		-DCMAKE_INSTALL_PREFIX=/usr \
 		-DINSTALL_DOCDIR=share/mysql/docs \
 		-DINSTALL_DOCREADMEDIR=share/mysql \
@@ -106,10 +100,11 @@ ifeq ($(SKIP_DEBUG_BINARY),)
 		-DWITH_NUMA=ON \
 		-DWITH_LDAP=system \
 		-DWITH_PERCONA_TELEMETRY=ON \
-		-DWITH_EXTRA_CHARSETS=all $(TOKUDB_OPTS_DEBUG) .. 
+		-DWITH_LTO=ON \
+		-DWITH_EXTRA_CHARSETS=all $(TOKUDB_OPTS_DEBUG) ..
 endif
 
-	rm -fr $(builddir) && mkdir $(builddir) && cd $(builddir) && \
+	( rm -fr $(builddir) &&  mkdir $(builddir) ) && cd $(builddir) && \
 	    cmake -DBUILD_CONFIG=mysql_release \
 		-DCMAKE_INSTALL_PREFIX=/usr \
 		-DINSTALL_DOCDIR=share/mysql/docs \
@@ -157,6 +152,7 @@ endif
 		-DWITH_NUMA=ON \
 		-DWITH_LDAP=system \
 		-DWITH_PERCONA_TELEMETRY=ON \
+		-DWITH_LTO=ON \
 		-DWITH_EXTRA_CHARSETS=all $(TOKUDB_OPTS_RELEASE) ..
 
 	touch $@
@@ -164,11 +160,8 @@ endif
 override_dh_auto_build:
 	@echo "RULES.$@"
 	
-ifeq ($(SKIP_DEBUG_BINARY),)
 	cd $(builddebug) && $(MAKE) -j$(NCPU)
-endif
-
-	cd $(builddir) && $(MAKE) -j$(NCPU) VERBOSE=1
+	cd $(builddir)   && $(MAKE) -j$(NCPU) VERBOSE=1
 
 	touch $@
 
@@ -179,8 +172,8 @@ override_dh_auto_install:
 	@echo "RULES.$@"
 
 	# complete install first
-	(cd $(builddebug) && $(MAKE) install DESTDIR=$(TMPD)/)
-	(cd $(builddir) && $(MAKE) install DESTDIR=$(TMP)/)
+	(cd $(builddebug) && $(MAKE) -j$(NCPU) install DESTDIR=$(TMPD)/)
+	(cd $(builddir)   && $(MAKE) -j$(NCPU) install DESTDIR=$(TMP)/)
 
 	# add Percona Server configuration file my.cnf to mysql-common package
 	#install -g root -o root -m 0644 -D debian/extra/my.cnf $(TMP)/etc/mysql/my.cnf
@@ -195,7 +188,7 @@ override_dh_auto_install:
 	# install default file for init script timeout params
 	install -d $(TMP)/etc/default
 	install -m 0644 debian/extra/default-mysql $(TMP)/etc/default/mysql
-        # Add helper functions for maintainer scripts
+	# Add helper functions for maintainer scripts
 	install -m 0644 debian/extra/mysql-helpers debian/tmp/usr/share/mysql/
 	# add apparmor profile
 #	install -g root -o root -m 0644 -D debian/extra/apparmor-profile $(TMP)/etc/apparmor.d/usr.sbin.mysqld
